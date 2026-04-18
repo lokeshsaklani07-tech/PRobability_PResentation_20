@@ -1,0 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Kalam:wght@400;700&display=swap');
+
+:root {
+  --bg-dark: #0B0C10; /* Deepest charcoal almost black */
+  --bg-accent: #1F2833; /* Slate grey */
+  --text-main: #FFFFFF;
+  --text-body: #C5C6C7; /* Soft grey */
+  --gold-primary: #C5B358; /* Premium Champagne Gold */
+  --gold-light: #E5DA96;
+  --border-subtle: rgba(197, 179, 88, 0.2);
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-hand: 'Kalam', cursive;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  color: var(--text-body);
+  overflow-x: hidden;
+  letter-spacing: 0.02em;
+}
+
+/* Subtle abstract grain/texture overlay to feel premium like high-end paper */
+body::after {
+  content: "";
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Presentation Container */
+.presentation-container {
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Slide Setup - Expanding width to feel cinematic */
+.slide {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 6rem;
+  position: relative;
+  background: radial-gradient(circle at 100% 0%, rgba(31, 40, 51, 0.4) 0%, rgba(11, 12, 16, 1) 60%);
+}
+
+/* Luxury Card / Layout Frame */
+.layout-frame {
+  width: 100%;
+  max-width: 1600px;
+  height: 100%;
+  border-left: 1px solid var(--border-subtle);
+  border-right: 1px solid var(--border-subtle);
+  padding: 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.is-visible .layout-frame {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Clean, modern typographic hierarchy */
+h1 {
+  font-family: var(--font-serif);
+  font-size: 5.5rem;
+  font-weight: 700;
+  color: var(--gold-primary);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+h2 { 
+  font-family: var(--font-serif);
+  font-size: 3.5rem; 
+  font-weight: 600; 
+  color: var(--text-main); 
+  margin-bottom: 1.5rem; 
+  line-height: 1.2;
+}
+h3 { 
+  font-family: var(--font-sans);
+  font-size: 1.4rem; 
+  font-weight: 500; 
+  color: var(--gold-primary); 
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem; 
+}
+p { 
+  font-size: 1.3rem; 
+  color: var(--text-body); 
+  line-height: 1.8; 
+  margin-bottom: 1.5rem; 
+  font-weight: 300;
+}
+strong { color: var(--text-main); font-weight: 500; }
+ul { list-style-position: inside; color: var(--text-body); font-size: 1.25rem; margin-bottom: 1.5rem; font-weight: 300;}
+li { margin-bottom: 1rem; }
+
+/* Grid Layouts using full space */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: stretch; height: 100%; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; align-items: stretch; }
+
+/* High-end Fintech Data Cards */
+.card-item { 
+  background: rgba(255, 255, 255, 0.02); 
+  padding: 3rem; 
+  border-top: 2px solid var(--gold-primary);
+  transition: background 0.4s ease;
+  position: relative;
+}
+.card-item:hover { background: rgba(197, 179, 88, 0.05); }
+
+/* Elegant Math Formulas */
+.formula-box {
+  background: none;
+  border-bottom: 1px solid var(--border-subtle);
+  border-top: 1px solid var(--border-subtle);
+  padding: 2.5rem 0;
+  text-align: left;
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-main);
+  margin: 2rem 0;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Hand-Drawn Notes */
+.hand-note {
+  font-family: var(--font-hand);
+  color: var(--gold-light);
+  font-size: 1.6rem;
+  position: absolute;
+  z-index: 50;
+  transform: rotate(-2deg);
+  opacity: 0.9;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+.hand-arrow {
+  position: absolute;
+  stroke: var(--gold-light);
+  fill: none;
+  stroke-width: 2.5;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  opacity: 0.8;
+}
+.is-visible .hand-arrow {
+  animation: drawArrow 2s ease-out forwards 1.5s; /* Delays so note draws after rough notation */
+}
+@keyframes drawArrow { to { stroke-dashoffset: 0; } }
+
+/* Modern Memes - Sleek Image treatment */
+.meme-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px; /* Sharp corners for premium feel */
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-accent);
+}
+.meme-bg { width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%) contrast(110%); opacity: 0.8; transition: opacity 0.4s ease; }
+.meme-container:hover .meme-bg { filter: grayscale(0%) contrast(110%); opacity: 1; }
+
+.meme-text {
+  position: absolute;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  color: var(--text-main);
+  text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  text-align: center;
+  line-height: 1.2;
+  background: rgba(11, 12, 16, 0.7);
+  padding: 0.5rem 1rem;
+  backdrop-filter: blur(4px);
+  border-left: 2px solid var(--gold-primary);
+}
+
+/* Nav Dots - Square and minimal */
+.nav-dots {
+  position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 1.5rem; z-index: 100;
+}
+.dot { width: 6px; height: 6px; background: rgba(255,255,255,0.2); cursor: pointer; transition: 0.3s; transform: rotate(45deg); }
+.dot.active { background: var(--gold-primary); transform: rotate(45deg) scale(1.8); box-shadow: 0 0 10px rgba(197,179,88,0.5); }
+
+/* Global Utilities */
+.flex-col { display: flex; flex-direction: column; }
+.justify-center { justify-content: center; }
+.align-center { align-items: center; }
+.mt-4 { margin-top: 3rem; }
+
+/* SVG Markers (used for arrows) */
+svg { overflow: visible; }
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .presentation-container { scroll-snap-type: none; overflow-x: hidden; }
+  .slide { height: auto; min-height: 100vh; padding: 0; background: var(--bg-dark); }
+  .layout-frame { padding: 4rem 2rem; border: none; transform: none; opacity: 1; margin: 0;}
+  .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 2rem; }
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.5rem; }
+  .hand-note { display: none; /* Hide hand notes on small mobile screens to prevent overflow overlap */ }
+  .nav-dots { display: none; }
+}
