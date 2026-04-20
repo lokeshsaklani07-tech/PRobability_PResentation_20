@@ -38,43 +38,65 @@ const SlideWrapper = ({ id, activeSlide, children }) => {
 };
 
 export default function App() {
-  const bgImages = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg', 'bg7.jpg'];
+  const [activeSlide, setActiveSlide] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
   const [activeLayer, setActiveLayer] = useState(0); // 0 or 1
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const bg1Ref = useRef(null);
   const bg2Ref = useRef(null);
 
-  // Update background every 2 slides
-  useEffect(() => {
-    const newBgIndex = Math.floor(activeSlide / 2) % bgImages.length;
-    if (newBgIndex !== bgIndex) {
-      const nextLayer = 1 - activeLayer;
-      const nextBg = bgImages[newBgIndex];
-      
-      const layers = [bg1Ref.current, bg2Ref.current];
-      if (layers[nextLayer]) {
-        layers[nextLayer].style.backgroundImage = `url(${nextBg})`;
-        layers[nextLayer].style.opacity = 1;
-        layers[activeLayer].style.opacity = 0;
-      }
-      
-      setBgIndex(newBgIndex);
-      setActiveLayer(nextLayer);
-    }
-  }, [activeSlide, bgIndex, activeLayer]);
+  const bgImages = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg', 'bg7.jpg'];
 
-  const scrollToSlide = (i) => {
-    document.getElementById(`slide-${i}`)?.scrollIntoView({ behavior: 'smooth' });
-    setActiveSlide(i);
+  // PRELOAD IMAGES
+  useEffect(() => {
+    bgImages.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
+  // Handle slide transitions with swipe loader
+  const handleSlideChange = (newSlide) => {
+    if (newSlide < 0 || newSlide > 11) return;
+    setIsTransitioning(true);
+    setActiveSlide(newSlide);
+    setTimeout(() => {
+        setIsTransitioning(false);
+        document.getElementById(`slide-${newSlide}`)?.scrollIntoView({ behavior: 'smooth' });
+    }, 400);
   };
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') handleSlideChange(activeSlide + 1);
+      if (e.key === 'ArrowLeft') handleSlideChange(activeSlide - 1);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeSlide]);
+
   return (
-    <>
-      <div className="background-layers">
-        <div ref={bg1Ref} className="bg-layer" style={{backgroundImage: `url(${bgImages[0]})`, opacity: 1}}></div>
-        <div ref={bg2Ref} className="bg-layer" style={{backgroundImage: `url(${bgImages[0]})`, opacity: 0}}></div>
-      </div>
+    <div className="presentation-container">
       <ArrowDef />
+      
+      {/* Page Loader Swiper */}
+      <div className={`page-loader ${isTransitioning ? 'active' : ''}`} />
+
+      {/* Background Layers */}
+      <div className="background-layers">
+        <div ref={bg1Ref} className="bg-layer" style={{backgroundImage: `url(${bgImages[0]})`, opacity: 1}} />
+        <div ref={bg2Ref} className="bg-layer" style={{opacity: 0}} />
+      </div>
+
+      {/* Morphing Elements */}
+      <div className="morph-wrapper">
+        <div className="blob blob-1" />
+        <div className="blob blob-2" />
+      </div>
+
+      <div className="progress-container">
+        <div className="progress-bar" style={{ width: `${(activeSlide / 11) * 100}%` }} />
+      </div>
       <div className="nav-dots">
         {[...Array(TOTAL_SLIDES)].map((_, i) => (
           <div key={i} className={`dot ${activeSlide === i ? 'active' : ''}`} onClick={() => scrollToSlide(i)} />

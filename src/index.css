@@ -73,22 +73,69 @@ body::after {
   background-size: cover;
   background-position: center;
   transition: opacity 1.5s ease-in-out;
-  animation: moveIn 80s ease-in-out infinite alternate;
-  filter: brightness(0.4);
+  animation: moveIn 40s linear infinite alternate;
+  filter: brightness(0.7);
+  will-change: transform, opacity;
 }
 
 .bg-layer::before {
   content: "";
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at 100% 0%, rgba(31, 40, 51, 0.4) 0%, rgba(11, 12, 16, 0.8) 60%);
+  background: radial-gradient(circle at 100% 0%, rgba(31, 40, 51, 0.2) 0%, rgba(11, 12, 16, 0.7) 60%);
   z-index: 1;
 }
 
+/* Page Transition Swiper */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--gold-primary);
+  z-index: 9999;
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+  pointer-events: none;
+}
+.page-loader.active {
+  transform: translateX(200%);
+}
+
+/* Morphing Background Blobs */
+.morph-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.blob {
+  position: absolute;
+  background: linear-gradient(45deg, var(--gold-primary), #64ffda);
+  filter: blur(100px);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: morphBlob 20s infinite alternate;
+}
+
+.blob-1 { width: 50vw; height: 50vw; top: -10%; left: -10%; }
+.blob-2 { width: 40vw; height: 40vw; bottom: -10%; right: -10%; animation-delay: -5s; }
+
+@keyframes morphBlob {
+  0% { border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; transform: translate(0, 0) scale(1); }
+  50% { border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%; transform: translate(5%, 5%) scale(1.1); }
+  100% { border-radius: 50% 50% 50% 50% / 30% 70% 30% 70%; transform: translate(-5%, -5%) scale(0.9); }
+}
+
 @keyframes moveIn {
-  0% { transform: scale(1.1) translate(0%, 0%); }
-  50% { transform: scale(1.2) translate(-2%, -1%); }
-  100% { transform: scale(1.1) translate(1%, 0.5%); }
+  0% { transform: scale(1.05) translate(0,0); }
+  100% { transform: scale(1.15) translate(-1%, -1%); }
 }
 
 /* Luxury Card / Layout Frame */
