@@ -9,6 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Preload heavy images for zero-lag starts -->
+    <link rel="preload" as="image" href="bg1.jpg">
+    <link rel="preload" as="image" href="bg2.jpg">
+    <link rel="preload" as="image" href="bg3.jpg">
 
     <style>
         /* ===========================================
@@ -39,8 +44,8 @@
             --slide-padding: clamp(2rem, 5vw, 5rem);
 
             /* Animations */
-            --duration: 0.8s;
-            --ease: cubic-bezier(0.25, 1, 0.5, 1);
+            --duration: 0.5s; /* Snappier transitions */
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -593,7 +598,7 @@
 
             // Keyboard Navigation
             document.addEventListener('keydown', (e) => {
-                if (isAnimating) return;
+                // Removed blocks for faster response
                 
                 if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'ArrowDown') {
                     goToNextSlide();
