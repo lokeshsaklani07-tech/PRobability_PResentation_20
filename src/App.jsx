@@ -38,27 +38,42 @@ const SlideWrapper = ({ id, activeSlide, children }) => {
 };
 
 export default function App() {
-  const TOTAL_SLIDES = 12;
-  const [activeSlide, setActiveSlide] = useState(0);
+  const bgImages = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg', 'bg7.jpg'];
+  const [bgIndex, setBgIndex] = useState(0);
+  const [activeLayer, setActiveLayer] = useState(0); // 0 or 1
+  const bg1Ref = useRef(null);
+  const bg2Ref = useRef(null);
 
+  // Update background every 2 slides
   useEffect(() => {
-    if (window.innerWidth > 1024) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSlide(parseInt(entry.target.id.split('-')[1]));
-          }
-        });
-      }, { threshold: 0.5 });
-      document.querySelectorAll('.slide').forEach((s) => observer.observe(s));
-      return () => document.querySelectorAll('.slide').forEach((s) => observer.unobserve(s));
+    const newBgIndex = Math.floor(activeSlide / 2) % bgImages.length;
+    if (newBgIndex !== bgIndex) {
+      const nextLayer = 1 - activeLayer;
+      const nextBg = bgImages[newBgIndex];
+      
+      const layers = [bg1Ref.current, bg2Ref.current];
+      if (layers[nextLayer]) {
+        layers[nextLayer].style.backgroundImage = `url(${nextBg})`;
+        layers[nextLayer].style.opacity = 1;
+        layers[activeLayer].style.opacity = 0;
+      }
+      
+      setBgIndex(newBgIndex);
+      setActiveLayer(nextLayer);
     }
-  }, []);
+  }, [activeSlide, bgIndex, activeLayer]);
 
-  const scrollToSlide = (i) => document.getElementById(`slide-${i}`)?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSlide = (i) => {
+    document.getElementById(`slide-${i}`)?.scrollIntoView({ behavior: 'smooth' });
+    setActiveSlide(i);
+  };
 
   return (
     <>
+      <div className="background-layers">
+        <div ref={bg1Ref} className="bg-layer" style={{backgroundImage: `url(${bgImages[0]})`, opacity: 1}}></div>
+        <div ref={bg2Ref} className="bg-layer" style={{backgroundImage: `url(${bgImages[0]})`, opacity: 0}}></div>
+      </div>
       <ArrowDef />
       <div className="nav-dots">
         {[...Array(TOTAL_SLIDES)].map((_, i) => (
