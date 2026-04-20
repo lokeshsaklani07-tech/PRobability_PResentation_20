@@ -9,6 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Preload heavy images for zero-lag starts -->
+    <link rel="preload" as="image" href="bg1.jpg">
+    <link rel="preload" as="image" href="bg2.jpg">
+    <link rel="preload" as="image" href="bg3.jpg">
 
     <style>
         /* ===========================================
@@ -39,8 +44,8 @@
             --slide-padding: clamp(2rem, 5vw, 5rem);
 
             /* Animations */
-            --duration: 0.8s;
-            --ease: cubic-bezier(0.25, 1, 0.5, 1);
+            --duration: 0.5s; /* Snappier transitions */
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -75,11 +80,9 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            background-color: var(--bg-deep); /* Placeholder color while loading */
-            transition: opacity 1.2s ease-in-out;
-            animation: moveIn 40s linear infinite alternate;
+            transition: opacity 1.5s ease-in-out;
+            animation: moveIn 30s linear infinite alternate;
             filter: brightness(0.7);
-            will-change: transform, opacity; /* GPU Hint */
         }
 
         .background-layer::before {
@@ -301,28 +304,11 @@
             background: rgba(255,255,255,0.1);
             z-index: 100;
         }
-        /* Page Transition Overlay */
-        .page-loader {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-gold);
-            z-index: 9999;
-            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-            pointer-events: none;
-        }
-        .page-loader.active {
-            transform: translateX(200%);
-        }
-
         .progress-bar {
             height: 100%;
             background: var(--accent-gold);
             width: 0%;
             transition: width 0.5s ease;
-            box-shadow: 0 0 15px var(--accent-gold);
         }
 
         /* Equation Box */
@@ -357,9 +343,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Page Loader Animation -->
-    <div class="page-loader" id="page-loader"></div>
 
     <div class="background-layers">
         <div class="background-layer active" style="background-image: url('bg1.jpg');"></div>
@@ -599,15 +582,8 @@
             const slides = document.querySelectorAll('.slide');
             const bgLayers = document.querySelectorAll('.background-layer');
             const progressBar = document.getElementById('progress-bar');
-            const pageLoader = document.getElementById('page-loader');
             const bgImages = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg', 'bg4.jpg', 'bg5.jpg', 'bg6.jpg', 'bg7.jpg'];
             
-            // PRELOAD IMAGES
-            bgImages.forEach(src => {
-                const img = new Image();
-                img.src = src;
-            });
-
             let currentSlide = 0;
             let currentBgIndex = 0;
             let activeLayerIndex = 0;
@@ -622,7 +598,7 @@
 
             // Keyboard Navigation
             document.addEventListener('keydown', (e) => {
-                if (isAnimating) return;
+                // Removed blocks for faster response
                 
                 if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'ArrowDown') {
                     goToNextSlide();
@@ -667,21 +643,10 @@
             function updateState() {
                 updateProgress();
                 updateBackground();
-                
-                // Show transition loader
-                pageLoader.style.left = '-100%';
-                pageLoader.style.transition = 'none';
-                void pageLoader.offsetWidth; // Force reflow
-                pageLoader.style.transition = 'transform 0.6s cubic-bezier(0.77, 0, 0.175, 1)';
-                pageLoader.classList.add('active');
-                
-                setTimeout(() => {
-                    pageLoader.classList.remove('active');
-                }, 600);
 
                 setTimeout(() => {
                     isAnimating = false;
-                }, 300); 
+                }, 400); // Faster response time for navigation
             }
 
             function updateBackground() {
