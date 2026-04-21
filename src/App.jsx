@@ -58,7 +58,6 @@ export default function App() {
   const handleSlideChange = (newSlide) => {
     if (newSlide < 0 || newSlide > 11) return;
     setActiveSlide(newSlide);
-    document.getElementById(`slide-${newSlide}`)?.scrollIntoView({ behavior: 'auto' });
   };
 
   useEffect(() => {
@@ -85,8 +84,8 @@ export default function App() {
         <div className="progress-bar" style={{ width: `${(activeSlide / 11) * 100}%` }} />
       </div>
       <div className="nav-dots">
-        {[...Array(TOTAL_SLIDES)].map((_, i) => (
-          <div key={i} className={`dot ${activeSlide === i ? 'active' : ''}`} onClick={() => scrollToSlide(i)} />
+        {[...Array(12)].map((_, i) => (
+          <div key={i} className={`dot ${activeSlide === i ? 'active' : ''}`} onClick={() => handleSlideChange(i)} />
         ))}
       </div>
 

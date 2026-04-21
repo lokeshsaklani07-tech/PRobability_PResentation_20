@@ -37,21 +37,32 @@ body::after {
 .presentation-container {
   height: 100vh;
   width: 100vw;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  overflow: hidden; /* Prevent scrolling altogether, PPT style */
+  position: relative;
 }
 
 /* Slide Setup - Expanding width to feel cinematic */
 .slide {
   height: 100vh;
   width: 100vw;
-  scroll-snap-align: start;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 4rem 6rem;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.slide.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  z-index: 10;
 }
 
 .background-layers {
