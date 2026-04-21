@@ -56,17 +56,13 @@ export default function App() {
     });
   }, []);
 
-  // Handle slide transitions with swipe loader
+  // Handle slide transitions
   const handleSlideChange = (newSlide) => {
     if (newSlide < 0 || newSlide > 11) return;
-    setIsTransitioning(true);
     setIsZoomed(false); // Reset zoom
     setActiveSlide(newSlide);
-    setTimeout(() => {
-        setIsTransitioning(false);
-        setIsZoomed(true); // Trigger Zoom In
-        document.getElementById(`slide-${newSlide}`)?.scrollIntoView({ behavior: 'smooth' });
-    }, 400);
+    setIsZoomed(true); // Trigger Zoom In
+    document.getElementById(`slide-${newSlide}`)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -82,9 +78,6 @@ export default function App() {
     <div className="presentation-container">
       <ArrowDef />
       
-      {/* Page Loader Swiper */}
-      <div className={`page-loader ${isTransitioning ? 'active' : ''}`} />
-
       {/* Background Layers */}
       <div className="background-layers">
         <div ref={bg1Ref} className={`bg-layer ${isZoomed ? 'zoomed' : ''}`} style={{backgroundImage: `url(${bgImages[0]})`, opacity: 1}} />
