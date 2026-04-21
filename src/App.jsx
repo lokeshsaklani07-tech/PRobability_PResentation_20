@@ -104,7 +104,7 @@ export default function App() {
             <div style={{borderLeft: '1px solid var(--border-subtle)', paddingLeft: '4rem', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                <p style={{textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1rem', color: 'var(--text-muted)'}}>Prepared By</p>
                <h2 style={{margin: '0.5rem 0', fontSize: '2.5rem'}}>Lokesh Saklani</h2>
-               <p style={{fontFamily: 'monospace', color: 'var(--gold-light)'}}>Role No. 56</p>
+               <p style={{fontFamily: 'monospace', color: 'var(--gold-light)'}}>Roll No. 56</p>
             </div>
           </div>
         </SlideWrapper>
@@ -313,20 +313,20 @@ export default function App() {
         {/* Slide 9: Case Study */}
         <SlideWrapper id={9} activeSlide={activeSlide}>
           <h3>Real World Application</h3>
-          <h2>Predicting User Churn (SaaS)</h2>
+          <h2>Predicting Customer Cancellations</h2>
           <div className="grid-2 mt-4">
              <div>
-                <p><strong>The Corporate Problem:</strong> We are a SaaS business. Historically, 10% of users cancel their subscriptions (Churn). We want our AI to predict <em>who</em> will cancel before they actually do.</p>
-                <p><strong>The Evidence Found:</strong> We analyzed support tickets.</p>
+                <p><strong>The Corporate Problem:</strong> We run an online business. Historically, 10% of users cancel their subscriptions. We want our AI to predict <em>who</em> will cancel before they actually do.</p>
+                <p><strong>The Evidence Found:</strong> We analyzed customer support tickets.</p>
                 <ul>
-                  <li>60% of people who churned had filed a complaint.</li>
+                  <li>60% of people who cancelled had filed a complaint.</li>
                   <li>Only 20% of happy, retained users filed complaints.</li>
                 </ul>
              </div>
              <div className="card-item" style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
                 <h3 style={{color: 'white'}}>Converting to Mathematical Notation</h3>
-                <p style={{fontFamily: 'monospace', color: 'var(--gold-primary)', margin:'0.5rem 0'}}>P(Churn) = 0.10</p>
-                <p style={{fontFamily: 'monospace', color: 'white', margin:'0.5rem 0'}}>P(Ticket | Churn) = 0.60</p>
+                <p style={{fontFamily: 'monospace', color: 'var(--gold-primary)', margin:'0.5rem 0'}}>P(Cancel) = 0.10</p>
+                <p style={{fontFamily: 'monospace', color: 'white', margin:'0.5rem 0'}}>P(Ticket | Cancel) = 0.60</p>
                 <p style={{fontFamily: 'monospace', color: 'white', margin:'0.5rem 0'}}>P(Ticket | Retained) = 0.20</p>
              </div>
           </div>
@@ -338,8 +338,8 @@ export default function App() {
            <h2>Live Calculation Updating</h2>
            <p style={{position: 'relative'}}>
              A user just submitted a ticket. What is their new 
-             <RoughNotation type="circle" color="var(--gold-primary)" strokeWidth={2}> Churn Risk? </RoughNotation>
-             <HandNote text="We must find P(Churn | Ticket)" top="-40px" right="20%" />
+             <RoughNotation type="circle" color="var(--gold-primary)" strokeWidth={2}> Cancellation Risk? </RoughNotation>
+             <HandNote text="We must find P(Cancel | Ticket)" top="-40px" right="20%" />
            </p>
 
            <div className="card-item mt-4">
