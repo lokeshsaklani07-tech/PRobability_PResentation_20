@@ -119,8 +119,8 @@ export default function App() {
                 <RoughNotation type="highlight" color="#C5B35830" iterations={1} strokeWidth={2}> framework </RoughNotation> 
                 to quantify our uncertainty about the world. It exists on a strict spectrum from 0 to 1.</p>
               
-              <div className="formula-box">
-                P(Event) = <RoughNotation type="underline" color="var(--gold-primary)">Outcome</RoughNotation>
+              <div className="formula-box" style={{fontSize: '2rem'}}>
+                P(Event) = <RoughNotation type="underline" color="var(--gold-primary)">Favorable Outcomes</RoughNotation> / Total Possible
               </div>
 
                <HandNote 
