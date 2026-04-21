@@ -293,20 +293,25 @@ export default function App() {
 
         {/* Slide 8: Bayes */}
         <SlideWrapper id={8} activeSlide={activeSlide}>
-          <div style={{position: 'relative'}}>
-            <h3>Advanced Statistics</h3>
-            <h2>The Bayesian Update <span style={{fontFamily: 'var(--font-sans)', color: 'var(--text-muted)'}}>| The Engine of AI</span></h2>
-            <p style={{maxWidth: '800px', marginBottom: '2rem'}}>
-              Thomas Bayes proved we shouldn't just guess odds statically. We should start with a prior belief, and when <RoughNotation type="underline" color="var(--gold-primary)">new evidence</RoughNotation> arrives, mathematically update our accuracy.
-            </p>
-            
-            <div className="formula-box" style={{fontSize: '3.5rem', marginTop: '1rem'}}>
-               P(A|B) = <span style={{fontSize: '2rem'}}>[ P(B|A) × P(A) ] / P(B)</span>
-            </div>
+          <div className="grid-2 align-center">
+            <div style={{position: 'relative'}}>
+              <h3>Advanced Statistics</h3>
+              <h2>The Bayesian Update <span style={{fontFamily: 'var(--font-sans)', color: 'var(--text-muted)'}}>| The Engine of AI</span></h2>
+              <p style={{maxWidth: '800px', marginBottom: '2rem'}}>
+                Thomas Bayes proved we shouldn't just guess odds statically. We should start with a prior belief, and when <RoughNotation type="underline" color="var(--gold-primary)">new evidence</RoughNotation> arrives, mathematically update our accuracy.
+              </p>
+              
+              <div className="formula-box" style={{fontSize: '2.5rem', marginTop: '1rem'}}>
+                 P(A|B) = <span style={{fontSize: '1.6rem'}}>[ P(B|A) × P(A) ] / P(B)</span>
+              </div>
 
-            <HandNote text="Posterior (Updated Belief)" top="55%" left="5%" arrowSrc="M 0 0 Q 30 -30 60 -5" arrowW="70" arrowH="40" arrowStyle={{top:'-20px', right:'-70px'}} />
-            <HandNote text="Likelihood of Evidence" bottom="15%" left="40%" />
-            <HandNote text="Prior Belief" top="30%" right="20%" />
+              <HandNote text="Posterior (Updated Belief)" top="55%" left="5%" arrowSrc="M 0 0 Q 30 -30 60 -5" arrowW="70" arrowH="40" arrowStyle={{top:'-20px', right:'-70px'}} />
+              <HandNote text="Likelihood of Evidence" bottom="15%" left="40%" />
+              <HandNote text="Prior Belief" top="30%" right="20%" />
+            </div>
+            <div className="meme-container">
+               <img src="/bayesian_cat.png" alt="Bayesian Loading Cat" className="meme-bg" />
+            </div>
           </div>
         </SlideWrapper>
 
