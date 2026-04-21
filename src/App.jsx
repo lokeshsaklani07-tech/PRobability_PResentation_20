@@ -41,7 +41,6 @@ export default function App() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
   const [activeLayer, setActiveLayer] = useState(0); // 0 or 1
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [isZoomed, setIsZoomed] = useState(false);
   const bg1Ref = useRef(null);
   const bg2Ref = useRef(null);
