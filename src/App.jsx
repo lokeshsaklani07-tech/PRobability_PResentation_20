@@ -58,7 +58,7 @@ export default function App() {
   const handleSlideChange = (newSlide) => {
     if (newSlide < 0 || newSlide > 11) return;
     setActiveSlide(newSlide);
-    document.getElementById(`slide-${newSlide}`)?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(`slide-${newSlide}`)?.scrollIntoView({ behavior: 'auto' });
   };
 
   useEffect(() => {
@@ -80,11 +80,6 @@ export default function App() {
         <div ref={bg2Ref} className="bg-layer" style={{opacity: 0}} />
       </div>
 
-      {/* Morphing Elements */}
-      <div className="morph-wrapper">
-        <div className="blob blob-1" />
-        <div className="blob blob-2" />
-      </div>
 
       <div className="progress-container">
         <div className="progress-bar" style={{ width: `${(activeSlide / 11) * 100}%` }} />
