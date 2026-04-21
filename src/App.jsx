@@ -41,7 +41,6 @@ export default function App() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
   const [activeLayer, setActiveLayer] = useState(0); // 0 or 1
-  const [isZoomed, setIsZoomed] = useState(false);
   const bg1Ref = useRef(null);
   const bg2Ref = useRef(null);
 
@@ -58,9 +57,7 @@ export default function App() {
   // Handle slide transitions
   const handleSlideChange = (newSlide) => {
     if (newSlide < 0 || newSlide > 11) return;
-    setIsZoomed(false); // Reset zoom
     setActiveSlide(newSlide);
-    setIsZoomed(true); // Trigger Zoom In
     document.getElementById(`slide-${newSlide}`)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -79,8 +76,8 @@ export default function App() {
       
       {/* Background Layers */}
       <div className="background-layers">
-        <div ref={bg1Ref} className={`bg-layer ${isZoomed ? 'zoomed' : ''}`} style={{backgroundImage: `url(${bgImages[0]})`, opacity: 1}} />
-        <div ref={bg2Ref} className={`bg-layer ${isZoomed ? 'zoomed' : ''}`} style={{opacity: 0}} />
+        <div ref={bg1Ref} className="bg-layer" style={{backgroundImage: `url(${bgImages[0]})`, opacity: 1}} />
+        <div ref={bg2Ref} className="bg-layer" style={{opacity: 0}} />
       </div>
 
       {/* Morphing Elements */}
