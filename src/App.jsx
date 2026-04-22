@@ -105,6 +105,7 @@ export default function App() {
                <p style={{textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '1rem', color: 'var(--text-muted)'}}>Prepared By</p>
                <h2 style={{margin: '0.5rem 0', fontSize: '2.5rem'}}>Lokesh Saklani</h2>
                <p style={{fontFamily: 'monospace', color: 'var(--gold-light)'}}>Roll No. 56</p>
+               <img src="meme1.jpg" alt="Meme 1" style={{width: '100%', borderRadius: '10px', marginTop: '2rem'}} />
             </div>
           </div>
         </SlideWrapper>
@@ -131,13 +132,8 @@ export default function App() {
                   arrowStyle={{top: '-30px', left: '-140px'}}
                 />
             </div>
-            <div className="meme-container">
-               {/* Sleek corporate meme integration */}
-               <img src="https://i.imgflip.com/261o3j.jpg" alt="Brain Meme Strategy" className="meme-bg" />
-               <div className="meme-text" style={{top: '10%', right: '10%', width: '40%', fontSize: '1.2rem'}}>P(Coin Toss)</div>
-               <div className="meme-text" style={{top: '35%', right: '10%', width: '40%', fontSize: '1.2rem'}}>P(A ∪ B) = P(A) + P(B)</div>
-               <div className="meme-text" style={{top: '60%', right: '10%', width: '40%', fontSize: '1.2rem'}}>Bayesian Inference Modeling</div>
-               <div className="meme-text" style={{top: '85%', right: '10%', width: '40%', fontSize: '1rem'}}>Predicting SaaS Churn via Random Forests</div>
+            <div className="meme-container" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+               <img src="meme5.png" alt="Meme 5" style={{maxWidth: '100%', maxHeight: '400px', borderRadius: '10px', objectFit: 'contain'}} />
             </div>
           </div>
         </SlideWrapper>
@@ -196,6 +192,9 @@ export default function App() {
                  <p>Any specific subset of the sample space that we are attempting to measure the likelihood of.</p>
                  <p style={{fontStyle: 'italic', opacity: 0.8}}>Ex: E = {`{Visitor Buys}`}</p>
               </div>
+           </div>
+           <div style={{marginTop: '3rem', display: 'flex', justifyContent: 'center'}}>
+              <img src="meme3.jpg" alt="Terminology Meme" style={{maxWidth: '100%', maxHeight: '300px', borderRadius: '10px'}} />
            </div>
         </SlideWrapper>
 
@@ -293,20 +292,25 @@ export default function App() {
 
         {/* Slide 8: Bayes */}
         <SlideWrapper id={8} activeSlide={activeSlide}>
-          <div style={{position: 'relative'}}>
-            <h3>Advanced Statistics</h3>
-            <h2>The Bayesian Update <span style={{fontFamily: 'var(--font-sans)', color: 'var(--text-muted)'}}>| The Engine of AI</span></h2>
-            <p style={{maxWidth: '800px', marginBottom: '2rem'}}>
-              Thomas Bayes proved we shouldn't just guess odds statically. We should start with a prior belief, and when <RoughNotation type="underline" color="var(--gold-primary)">new evidence</RoughNotation> arrives, mathematically update our accuracy.
-            </p>
-            
-            <div className="formula-box" style={{fontSize: '3.5rem', marginTop: '1rem'}}>
-               P(A|B) = <span style={{fontSize: '2rem'}}>[ P(B|A) × P(A) ] / P(B)</span>
-            </div>
+          <div className="grid-2 align-center">
+            <div style={{position: 'relative'}}>
+              <h3>Advanced Statistics</h3>
+              <h2>The Bayesian Update <span style={{fontFamily: 'var(--font-sans)', color: 'var(--text-muted)'}}>| The Engine of AI</span></h2>
+              <p style={{maxWidth: '800px', marginBottom: '2rem'}}>
+                Thomas Bayes proved we shouldn't just guess odds statically. We should start with a prior belief, and when <RoughNotation type="underline" color="var(--gold-primary)">new evidence</RoughNotation> arrives, mathematically update our accuracy.
+              </p>
+              
+              <div className="formula-box" style={{fontSize: '3.5rem', marginTop: '1rem'}}>
+                 P(A|B) = <span style={{fontSize: '2rem'}}>[ P(B|A) × P(A) ] / P(B)</span>
+              </div>
 
-            <HandNote text="Posterior (Updated Belief)" top="55%" left="5%" arrowSrc="M 0 0 Q 30 -30 60 -5" arrowW="70" arrowH="40" arrowStyle={{top:'-20px', right:'-70px'}} />
-            <HandNote text="Likelihood of Evidence" bottom="15%" left="40%" />
-            <HandNote text="Prior Belief" top="30%" right="20%" />
+              <HandNote text="Posterior (Updated Belief)" top="55%" left="5%" arrowSrc="M 0 0 Q 30 -30 60 -5" arrowW="70" arrowH="40" arrowStyle={{top:'-20px', right:'-70px'}} />
+              <HandNote text="Likelihood of Evidence" bottom="15%" left="40%" />
+              <HandNote text="Prior Belief" top="30%" right="20%" />
+            </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+               <img src="meme2.jpg" alt="Bayes Meme" style={{maxWidth: '100%', maxHeight: '400px', borderRadius: '10px'}} />
+            </div>
           </div>
         </SlideWrapper>
 
