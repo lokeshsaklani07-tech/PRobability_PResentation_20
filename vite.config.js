@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/PRobability_PResentation/',
+  base: '/PRobability_PResentation_20/',
 })
